@@ -896,7 +896,7 @@ CharacterController:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
@@ -1138,7 +1138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e17522169d774a4d90d3de6a896820e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 0
+  walkSpeed: 8
+  playerFallSpeed: 6
+  jumpSpeed: 10
+  lookSensitivity: 0.25
 --- !u!1 &1646693552
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,14 +14,14 @@ public class CharacterScript : MonoBehaviour
     private Vector3 playerJump = Vector3.zero;
 
 
-    CapsuleCollider collider;
+
 
     // private Vector3 playerFallMovement = Vector3.down;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        collider = GetComponent<CapsuleCollider>();
+
     }
 
     // Update is called once per frame

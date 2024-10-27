@@ -7,11 +7,11 @@ public class CharacterScript : MonoBehaviour
 
     public float walkSpeed;
     public float playerFallSpeed;
-
+    public float jumpSpeed;
     public float lookSensitivity;
     private Vector3 playerMovement = Vector3.zero;
     private Vector3 playerRotation = Vector3.zero;
-
+    private Vector3 playerJump = Vector3.zero;
 
 
     // private Vector3 playerFallMovement = Vector3.down;
@@ -29,7 +29,13 @@ public class CharacterScript : MonoBehaviour
 
         transform.Rotate(playerRotation * lookSensitivity);
 
+        transform.Translate(Time.deltaTime * jumpSpeed * playerJump);
+
+
+
         transform.Translate(Time.deltaTime * playerFallSpeed * GetFall());
+
+
 
     }
     public void OnMove(InputAction.CallbackContext context)
@@ -50,12 +56,21 @@ public class CharacterScript : MonoBehaviour
         Vector2 lookInput = context.ReadValue<Vector2>();
         playerRotation = new Vector3(0, lookInput.x, 0);
 
-        print(lookInput);
+        // print(lookInput);
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        Vector2 jumpInput = context.ReadValue<Vector2>();
+        // if (controller.isGrounded)
+        // {
+        float jumpInput = context.ReadValue<float>();
+        playerJump = new Vector3(0, jumpInput, 0);
+        // }
+
+        // print(controller.);
+
+
+        // print(jumpInput);
     }
 
 
@@ -65,6 +80,11 @@ public class CharacterScript : MonoBehaviour
         {
             return Vector3.down;
         }
+
+        // if (!controller.isGrounded)
+        // {
+        //     return Vector3.down;
+        // }
         return Vector3.zero;
     }
 }

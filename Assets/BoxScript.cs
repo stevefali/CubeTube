@@ -21,15 +21,15 @@ public class BoxScript : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            boxRigidBody.linearVelocity = Vector3.up * jumpingSpeed;
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     boxRigidBody.linearVelocity = Vector3.up * jumpingSpeed;
+        // }
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            boxRigidBody.linearVelocity = transform.forward * walkingSpeed;
-        }
+        // if (Input.GetKey(KeyCode.W))
+        // {
+        //     boxRigidBody.linearVelocity = transform.forward * walkingSpeed;
+        // }
 
 
 

@@ -597,6 +597,7 @@ MonoBehaviour:
   block2: {fileID: 3965182800212438851, guid: 651844cb6fe821d4ab77e20440ebcc97, type: 3}
   block3: {fileID: 4597218118729447862, guid: 17b5d803e59829e48a6e43446f4651ad, type: 3}
   mapSize: {x: 32, y: 32, z: 128}
+  blockSize: 0.5
 --- !u!4 &750594939
 Transform:
   m_ObjectHideFlags: 0

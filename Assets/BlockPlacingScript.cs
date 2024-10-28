@@ -11,6 +11,7 @@ public class BlockPlacingScript : MonoBehaviour
     public GameObject block3;
 
     public Vector3Int mapSize;
+    public float blockSize;
 
     private Vector3 blockOffset = new(0.25f, 0.25f, 0.25f);
 
@@ -38,9 +39,28 @@ public class BlockPlacingScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    // void Update()
+    // {
 
+    // }
+
+
+    public void Render3DTileMap(int[,,] threeDArr)
+    {
+        for (int x = 0; x < threeDArr.GetUpperBound(0); x++)
+        {
+            for (int y = 0; y < threeDArr.GetUpperBound(1); y++)
+            {
+                for (int z = 0; z < threeDArr.GetUpperBound(2); z++)
+                {
+                    if (threeDArr[x, y, z] == 1)
+                    {
+                        Vector3 pos = new(x, y, z);
+                        PlaceBlock(pos * blockSize);
+                    }
+                }
+            }
+        }
     }
 
 

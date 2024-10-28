@@ -24,23 +24,24 @@ public class ProceduralGen
     }
 
 
-    // The floor array will be arranged as (z, y, x)
     private int[,,] InitializeFloorArray(int width, int height, int length)
     {
-        int[,,] floorArray = new int[length, height, width];
+        int[,,] floorArray = new int[width, height, length];
 
-        for (int z = 0; z < floorArray.GetUpperBound(0); z++)
+        for (int x = 0; x < floorArray.GetUpperBound(0); x++)
         {
             for (int y = 0; y < floorArray.GetUpperBound(1); y++)
             {
-                for (int x = 0; x < floorArray.GetUpperBound(2); x++)
+                for (int z = 0; z < floorArray.GetUpperBound(2); z++)
                 {
-                    floorArray[z, y, x] = 0;
+                    floorArray[x, y, z] = 0;
                 }
             }
         }
         return floorArray;
     }
+
+
 
 
 }

@@ -10,12 +10,19 @@ public class BlockPlacingScript : MonoBehaviour
     public GameObject block2;
     public GameObject block3;
 
+    public Vector3Int mapSize;
+
     private Vector3 blockOffset = new(0.25f, 0.25f, 0.25f);
+
+    private ProceduralGen proceduralGen;
 
     private System.Random r;
 
     void Start()
     {
+
+        proceduralGen = new ProceduralGen(this, mapSize);
+
         r = new System.Random();
 
 
@@ -26,7 +33,8 @@ public class BlockPlacingScript : MonoBehaviour
             PlaceBlock(position);
         }
 
-        print(blockOffset + Vector3.forward);
+        proceduralGen.TestGenerate();
+
     }
 
     // Update is called once per frame
@@ -36,7 +44,7 @@ public class BlockPlacingScript : MonoBehaviour
     }
 
 
-    private void PlaceBlock(Vector3 position)
+    public void PlaceBlock(Vector3 position)
     {
         int selector = r.Next(0, 3);
         switch (selector)

@@ -19,49 +19,55 @@ public class BlockPlacingScript : MonoBehaviour
 
     private System.Random r;
 
+    private static bool isReady = false;
+
     void Start()
     {
-
-        proceduralGen = new ProceduralGen(this, mapSize);
-
         r = new System.Random();
 
 
-        for (float i = 0; i < 160; i++)
-        {
-            Vector3 position = new(i / 2, 0, 0);
-            position += blockOffset;
-            PlaceBlock(position);
-        }
+        float floorSeed = r.Next(10000, 10000000);
+        float wallSeed = r.Next(10000, 10000000);
 
-        proceduralGen.TestGenerate();
+        proceduralGen = new ProceduralGen(this, mapSize, floorSeed, wallSeed);
+
+        proceduralGen.Generate();
 
     }
 
-    // Update is called once per frame
-    // void Update()
-    // {
 
-    // }
-
-
-    public void Render3DTileMap(int[,,] threeDArr)
+    public void RenderFloorMap(int[,] floorArray)
     {
-        for (int x = 0; x < threeDArr.GetUpperBound(0); x++)
+        for (int x = 0; x <= floorArray.GetUpperBound(0); x++)
         {
-            for (int y = 0; y < threeDArr.GetUpperBound(1); y++)
+            for (int y = 0; y <= floorArray.GetUpperBound(1); y++)
             {
-                for (int z = 0; z < threeDArr.GetUpperBound(2); z++)
+                if (floorArray[x, y] == 1)
                 {
-                    if (threeDArr[x, y, z] == 1)
-                    {
-                        Vector3 pos = new(x, y, z);
-                        PlaceBlock(pos * blockSize);
-                    }
+                    Vector3 pos = new(x, y, 0);
+                    PlaceBlock((pos * blockSize) + blockOffset);
                 }
             }
         }
+        isReady = true;
     }
+
+    public void RenderWallMap(int[,] wallArray)
+    {
+        for (int x = 0; x <= wallArray.GetUpperBound(0); x++)
+        {
+            for (int z = 0; z <= wallArray.GetUpperBound(1); z++)
+            {
+                if (wallArray[x, z] == 1)
+                {
+                    Vector3 pos = new(x, 0, z);
+                    PlaceBlock((pos * blockSize) + blockOffset);
+                }
+            }
+        }
+        isReady = true;
+    }
+
 
 
     public void PlaceBlock(Vector3 position)
@@ -83,5 +89,20 @@ public class BlockPlacingScript : MonoBehaviour
                 break;
         }
 
+    }
+
+    public static bool GetIsReady()
+    {
+        if (isReady)
+        {
+            isReady = false;
+            return true;
+        }
+        return false;
+    }
+
+    public static Vector3 GetStartPos()
+    {
+        return new Vector3(0, ProceduralGen.startHeight, 0);
     }
 }

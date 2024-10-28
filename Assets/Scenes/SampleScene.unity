@@ -1129,7 +1129,7 @@ MonoBehaviour:
   walkSpeed: 8
   playerFallSpeed: 6
   jumpSpeed: 4
-  lookSensitivity: 0.25
+  lookSensitivity: 0.2
 --- !u!54 &1318183522
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1138,7 +1138,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1318183513}
   serializedVersion: 4
-  m_Mass: 1.5
+  m_Mass: 3
   m_Drag: 1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

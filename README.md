@@ -14,9 +14,6 @@ However, I am proud of what I have been able to accomplish so far, considering t
 
 My initial idea was to generate the playing area using blocks as 3D tiles. However, that ended up making the game slow down quite a bit from having to render so many game objects. I instead moved to this method of creating walls, floors, and ceiling with long, rectangular blocks to save on the number of game objects required and to also shorten development time a bit for this iteration by being able to essentially produce 2D procedurally generated maps and then give them the third dimension by making the blocks long on the third axis.
 
-
-
-
 ### Here are a couple of screenshots of what the procedurally generated map looks like so far:
 
 ### Walls generated procedurally using Perlin Noise
@@ -26,7 +23,8 @@ My initial idea was to generate the playing area using blocks as 3D tiles. Howev
 ![Inside the generated tunnel](readme-images/generated-tunnel.png)
 
 
-### There is currently a bug that sometimes occurs where the walls turn out straight
+### There is currently a bug that sometimes occurs where the walls turn out straight (but the floor and ceiling still generate normally)
 ![Bug that sometimes happens where the walls turn out straight](readme-images/bug.png)
 
-
+#### My inspiration for this game was actually this webpage. You can't tell from the screenshot, but there is a circle that bounces around on the screen while scrambling the pixels within it, gradually changing the pixels of the whole screen to new randomized values as it goes. 
+![This is the webpage that inspired this project](readme-images/inspiration.png)

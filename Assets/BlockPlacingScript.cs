@@ -23,7 +23,7 @@ public class BlockPlacingScript : MonoBehaviour
 
     private System.Random r;
 
-    private static bool isReady = false;
+    // private static bool isReady = false;
 
     void Start()
     {
@@ -68,7 +68,7 @@ public class BlockPlacingScript : MonoBehaviour
                 }
             }
         }
-        isReady = true;
+        // isReady = true;
     }
 
 

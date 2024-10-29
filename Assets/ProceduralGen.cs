@@ -11,8 +11,8 @@ public class ProceduralGen
     private float floorSeed;
     private float wallSeed;
 
-    public static float startHeight;
-    public static float startZPos;
+    // public static float startHeight;
+    // public static float startZPos;
 
     private System.Random r = new System.Random();
 
@@ -58,8 +58,9 @@ public class ProceduralGen
     {
         System.Random hashCode = new System.Random(floorSeed.GetHashCode());
 
-        int lastHeight = Random.Range(0, floorMap.GetUpperBound(1));
-        startHeight = lastHeight;
+        // int lastHeight = Random.Range(0, floorMap.GetUpperBound(1));
+        // startHeight = lastHeight;
+        int lastHeight = 0;
 
         int nextMove = 0;
 
@@ -160,15 +161,15 @@ public class ProceduralGen
         }
 
         // We can reference where to start the player's z position based on the blocks in the third row (roughly the x position)
-        int[] thirdRowFromStart = new int[map.GetLength(1)];
-        for (int i = 0; i < map.GetLength(1); i++)
-        {
-            thirdRowFromStart[i] = map[2, i];
-        }
-        // The block is at the last index with value 1 in the row
-        int mostInnerblock = thirdRowFromStart.Count(num => num == 1);
+        // int[] thirdRowFromStart = new int[map.GetLength(1)];
+        // for (int i = 0; i < map.GetLength(1); i++)
+        // {
+        //     thirdRowFromStart[i] = map[2, i];
+        // }
+        // // The block is at the last index with value 1 in the row
+        // int mostInnerblock = thirdRowFromStart.Count(num => num == 1);
 
-        startZPos = mostInnerblock + 2.5f;
+        // startZPos = mostInnerblock + 2.5f;
         return map;
     }
 

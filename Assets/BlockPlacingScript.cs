@@ -13,7 +13,7 @@ public class BlockPlacingScript : MonoBehaviour
     public float blockSize;
 
     private Vector3 floorBlockOffset = new(0.25f, 0.25f, 16f);
-    private Vector3 wallBlockOffset = new(0.25f, 12f, 0.25f);
+    private Vector3 wallBlockOffset = new(0.25f, 0.25f, 0.25f);
 
     private Vector3 verticalSpace = new(0f, 7.5f, 0f);
     private Vector3 horizontalSpace = new(0f, 0f, 5f);
@@ -90,19 +90,19 @@ public class BlockPlacingScript : MonoBehaviour
 
     }
 
-    public static bool GetIsReady()
-    {
-        if (isReady)
-        {
-            isReady = false;
-            return true;
-        }
-        return false;
-    }
+    // public static bool GetIsReady()
+    // {
+    //     if (isReady)
+    //     {
+    //         isReady = false;
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
-    public static Vector3 GetStartPos()
-    {
-        return new Vector3(1.5f, ProceduralGen.startHeight, ProceduralGen.startZPos);
+    // public static Vector3 GetStartPos()
+    // {
+    //     return new Vector3(1.5f, ProceduralGen.startHeight, ProceduralGen.startZPos);
 
-    }
+    // }
 }

@@ -15,8 +15,6 @@ public class CharacterScript : MonoBehaviour
     private Vector3 playerRotation = Vector3.zero;
     private Vector3 cameraRotation;
 
-    private static Vector3 startPos;
-
 
     void Start()
     {
@@ -26,7 +24,6 @@ public class CharacterScript : MonoBehaviour
 
     void Update()
     {
-        setStartPos();
         transform.Translate(Time.deltaTime * walkSpeed * playerMovement);
 
         transform.Rotate(playerRotation * lookSensitivity);
@@ -62,14 +59,5 @@ public class CharacterScript : MonoBehaviour
     private bool GetIsGrounded()
     {
         return Physics.Raycast(transform.position, -Vector3.up, 1.15f);
-    }
-
-    private void setStartPos()
-    {
-        if (BlockPlacingScript.GetIsReady())
-        {
-            transform.position = BlockPlacingScript.GetStartPos();
-            print(BlockPlacingScript.GetStartPos());
-        }
     }
 }

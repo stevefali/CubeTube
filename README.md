@@ -28,3 +28,6 @@ My initial idea was to generate the playing area using blocks as 3D tiles. Howev
 
 #### My inspiration for this game was actually this webpage. You can't tell from the screenshot, but there is a circle that bounces around on the screen while scrambling the pixels within it, gradually changing the pixels of the whole screen to new randomized values as it goes. 
 ![This is the webpage that inspired this project](readme-images/inspiration.png)
+
+To get started on learning about procedural generation, I started my coding a simple webpage that procedurally generates a randomized simple 2D tile map on a canvas:
+![This is what that webpage looked like](readme-images/pg-map.png)

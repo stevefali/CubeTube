@@ -69,6 +69,7 @@ public class CharacterScript : MonoBehaviour
         if (BlockPlacingScript.GetIsReady())
         {
             transform.position = BlockPlacingScript.GetStartPos();
+            print(BlockPlacingScript.GetStartPos());
         }
     }
 }

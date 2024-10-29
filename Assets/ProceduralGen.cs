@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.InputSystem.Interactions;
 
 public class ProceduralGen
 {
@@ -9,6 +12,7 @@ public class ProceduralGen
     private float wallSeed;
 
     public static float startHeight;
+    public static float startZPos;
 
     private System.Random r = new System.Random();
 
@@ -23,14 +27,19 @@ public class ProceduralGen
 
     public void Generate()
     {
-        int[,] emptyFloorArr = InitializeFloorArray(mapSize.x, mapSize.y);
+        int[,] emptyFloorArr = InitializeArray(mapSize.x, mapSize.y);
         int[,] finishedFloorMap = GenerateFloorMap(emptyFloorArr, 7, floorSeed);
 
         placer.RenderFloorMap(finishedFloorMap);
+
+        int[,] emptyWallArr = InitializeArray(mapSize.x, mapSize.y);
+        int[,] finishedWallMap = GenerateWallMap(emptyWallArr, wallSeed, 10);
+
+        placer.RenderWallMap(finishedWallMap);
     }
 
 
-    private int[,] InitializeFloorArray(int width, int height)
+    private int[,] InitializeArray(int width, int height)
     {
         int[,] floorArray = new int[width, height];
 
@@ -79,9 +88,23 @@ public class ProceduralGen
 
             for (int y = lastHeight; y > lastHeight - 3; y--)
             {
-                floorMap[x, y] = 1;
+                if (y >= 0 && y < floorMap.GetUpperBound(1))
+                {
+                    floorMap[x, y] = 1;
+                }
+
             }
         }
+
+        // // For the player's starting y position, we can get the highest index with value 1 in the first row.
+        // int[] firstRow = new int[floorMap.GetLength(1)];
+        // for (int i = 0; i < floorMap.GetLength(1); i++)
+        // {
+        //     firstRow[i] = floorMap[0, i];
+        // }
+        // // The block is at the last index with value 1 in the row
+        // int firstBlock = firstRow.Count(num => num == 1);
+        // startHeight = firstBlock;
         return floorMap;
     }
 
@@ -124,14 +147,28 @@ public class ProceduralGen
 
             for (int x = lastPos.x; x < currentPos.x; x++)
             {
-                for (int z = Mathf.FloorToInt(currHeight); z > 0; z--)
+                for (int z = Mathf.FloorToInt(currHeight); z > (Mathf.FloorToInt(currHeight) - 4); z--)
                 {
-                    map[x, z] = 1;
+                    if (z >= 0)
+                    {
+                        map[x, z] = 1;
+                    }
+
                 }
                 currHeight += heightChange;
             }
         }
 
+        // We can reference where to start the player's z position based on the blocks in the third row (roughly the x position)
+        int[] thirdRowFromStart = new int[map.GetLength(1)];
+        for (int i = 0; i < map.GetLength(1); i++)
+        {
+            thirdRowFromStart[i] = map[2, i];
+        }
+        // The block is at the last index with value 1 in the row
+        int mostInnerblock = thirdRowFromStart.Count(num => num == 1);
+
+        startZPos = mostInnerblock + 2.5f;
         return map;
     }
 

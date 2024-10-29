@@ -1,19 +1,23 @@
 using System;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlockPlacingScript : MonoBehaviour
 {
 
-    public GameObject block;
-    public GameObject block1;
-    public GameObject block2;
-    public GameObject block3;
+    public GameObject floorBlock;
+    public GameObject wallBlock;
 
     public Vector3Int mapSize;
     public float blockSize;
 
-    private Vector3 blockOffset = new(0.25f, 0.25f, 0.25f);
+    private Vector3 floorBlockOffset = new(0.25f, 0.25f, 16f);
+    private Vector3 wallBlockOffset = new(0.25f, 12f, 0.25f);
+
+    private Vector3 verticalSpace = new(0f, 7.5f, 0f);
+    private Vector3 horizontalSpace = new(0f, 0f, 5f);
+
 
     private ProceduralGen proceduralGen;
 
@@ -45,11 +49,10 @@ public class BlockPlacingScript : MonoBehaviour
                 if (floorArray[x, y] == 1)
                 {
                     Vector3 pos = new(x, y, 0);
-                    PlaceBlock((pos * blockSize) + blockOffset);
+                    PlaceBlock((pos * blockSize), false);
                 }
             }
         }
-        isReady = true;
     }
 
     public void RenderWallMap(int[,] wallArray)
@@ -61,7 +64,7 @@ public class BlockPlacingScript : MonoBehaviour
                 if (wallArray[x, z] == 1)
                 {
                     Vector3 pos = new(x, 0, z);
-                    PlaceBlock((pos * blockSize) + blockOffset);
+                    PlaceBlock((pos * blockSize), true);
                 }
             }
         }
@@ -70,23 +73,19 @@ public class BlockPlacingScript : MonoBehaviour
 
 
 
-    public void PlaceBlock(Vector3 position)
+    public void PlaceBlock(Vector3 position, bool isWall)
     {
-        int selector = r.Next(0, 3);
-        switch (selector)
+        if (isWall)
         {
-            case 0:
-                Instantiate(block, position, transform.rotation);
-                break;
-            case 1:
-                Instantiate(block1, position, transform.rotation);
-                break;
-            case 2:
-                Instantiate(block2, position, transform.rotation);
-                break;
-            case 3:
-                Instantiate(block3, position, transform.rotation);
-                break;
+            Instantiate(wallBlock, position + wallBlockOffset, transform.rotation);
+            print("!");
+            Instantiate(wallBlock, position + wallBlockOffset + horizontalSpace, transform.rotation);
+        }
+        else
+        {
+            Instantiate(floorBlock, position + floorBlockOffset, transform.rotation);
+            print("!!");
+            Instantiate(floorBlock, position + floorBlockOffset + verticalSpace, transform.rotation);
         }
 
     }
@@ -103,6 +102,7 @@ public class BlockPlacingScript : MonoBehaviour
 
     public static Vector3 GetStartPos()
     {
-        return new Vector3(0, ProceduralGen.startHeight, 0);
+        return new Vector3(1.5f, ProceduralGen.startHeight, ProceduralGen.startZPos);
+
     }
 }

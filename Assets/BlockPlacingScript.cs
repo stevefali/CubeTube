@@ -39,6 +39,11 @@ public class BlockPlacingScript : MonoBehaviour
 
     }
 
+    // void Update()
+    // {
+    //     // GetIsReady();
+    // }
+
 
     public void RenderFloorMap(int[,] floorArray)
     {
@@ -90,19 +95,35 @@ public class BlockPlacingScript : MonoBehaviour
 
     }
 
-    // public static bool GetIsReady()
+    // private void GetIsReady()
     // {
     //     if (isReady)
     //     {
     //         isReady = false;
-    //         return true;
+    //         GetStartPos();
+    //         // return true;
     //     }
-    //     return false;
+    //     // return false;
     // }
 
-    // public static Vector3 GetStartPos()
+    // private void GetStartPos(int[,] wallArray)
     // {
-    //     return new Vector3(1.5f, ProceduralGen.startHeight, ProceduralGen.startZPos);
+    //     // return new Vector3(1.5f, ProceduralGen.startHeight, ProceduralGen.startZPos);
+    //     float doorwayZStart = ProceduralGen.startZPos;
+
+
+    //     // Find out where the first row is to make a wall that blocks the rest of the map but leaves the opening to the cave.
+    //     int[] firstRow = new int[map.GetLength(1)];
+    //     for (int i = 0; i < map.GetLength(1); i++)
+    //     {
+    //         firstRow[i] = map[0, i];
+    //     }
+    //     // // The block is at the last index with value 1 in the row
+    //     int mostInnerblock = firstRow.Count(num => num == 1);
+
+    //     startZPos = mostInnerblock;
 
     // }
+
+
 }

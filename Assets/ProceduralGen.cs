@@ -160,16 +160,6 @@ public class ProceduralGen
             }
         }
 
-        // We can reference where to start the player's z position based on the blocks in the third row (roughly the x position)
-        // int[] thirdRowFromStart = new int[map.GetLength(1)];
-        // for (int i = 0; i < map.GetLength(1); i++)
-        // {
-        //     thirdRowFromStart[i] = map[2, i];
-        // }
-        // // The block is at the last index with value 1 in the row
-        // int mostInnerblock = thirdRowFromStart.Count(num => num == 1);
-
-        // startZPos = mostInnerblock + 2.5f;
         return map;
     }
 

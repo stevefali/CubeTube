@@ -8,6 +8,7 @@ public class ExplorerScript : MonoBehaviour
     public float lookSensitivity;
     private Vector3 explorerMovement = Vector3.zero;
     private Vector3 explorerRotation = Vector3.zero;
+    private Vector3 cameraRotation = Vector3.zero;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class ExplorerScript : MonoBehaviour
     {
         transform.Translate(Time.deltaTime * moveSpeed * explorerMovement);
         transform.Rotate(explorerRotation * lookSensitivity);
+        GetComponentInChildren<Camera>().transform.Rotate(cameraRotation * lookSensitivity);
     }
 
 
@@ -31,6 +33,7 @@ public class ExplorerScript : MonoBehaviour
     public void OnLook(InputAction.CallbackContext context)
     {
         Vector2 lookInput = context.ReadValue<Vector2>();
-        explorerRotation = new Vector3(-lookInput.y, lookInput.x, 0);
+        explorerRotation = new Vector3(0, lookInput.x, 0);
+        cameraRotation = new Vector3(-lookInput.y, 0, 0);
     }
 }

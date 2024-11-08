@@ -21,9 +21,22 @@ public class ExplorerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Time.deltaTime * moveSpeed * explorerMovement);
+        // transform.Translate(Time.deltaTime * moveSpeed * explorerMovement);
+        if (!GetComponent<Rigidbody>().useGravity)
+        {
+            MoveFlying();
+        }
+
         transform.Rotate(explorerRotation * lookSensitivity);
         GetComponentInChildren<Camera>().transform.Rotate(cameraRotation * lookSensitivity);
+    }
+
+    void FixedUpdate()
+    {
+        if (GetComponent<Rigidbody>().useGravity)
+        {
+            MoveWithGravity();
+        }
     }
 
 
@@ -31,6 +44,9 @@ public class ExplorerScript : MonoBehaviour
     {
         Vector2 moveInput = context.ReadValue<Vector2>();
         explorerMovement = new Vector3(moveInput.x, 0, moveInput.y);
+
+
+
     }
 
     public void OnLook(InputAction.CallbackContext context)
@@ -48,10 +64,24 @@ public class ExplorerScript : MonoBehaviour
     }
 
 
+    // Triggered by the 'K' key
     public void OnToggleFly()
     {
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         rigidbody.useGravity = !rigidbody.useGravity;
         print("grav");
+    }
+
+    private void MoveFlying()
+    {
+        transform.Translate(Time.deltaTime * moveSpeed * explorerMovement);
+    }
+
+    private void MoveWithGravity()
+    {
+        Rigidbody rigidbody = GetComponent<Rigidbody>();
+        Vector3 moveThrust = rigidbody.rotation * explorerMovement * moveSpeed * 10;
+
+        rigidbody.AddForce(moveThrust.x, 0, moveThrust.z);
     }
 }

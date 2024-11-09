@@ -8,6 +8,8 @@ public class ExplorerScript : MonoBehaviour
     public float lookSensitivity;
     public float jumpSpeed;
     private Vector3 explorerMovement = Vector3.zero;
+
+    private Vector3 flyDownMovement = Vector3.zero;
     private Vector3 explorerRotation = Vector3.zero;
     private Vector3 cameraRotation = Vector3.zero;
 
@@ -25,6 +27,7 @@ public class ExplorerScript : MonoBehaviour
         if (!GetComponent<Rigidbody>().useGravity)
         {
             MoveFlying();
+            FlyDown();
         }
 
         transform.Rotate(explorerRotation * lookSensitivity);
@@ -61,6 +64,17 @@ public class ExplorerScript : MonoBehaviour
     {
         print("Type: " + context.interaction.GetType() + " Value: " + context.ReadValue<float>());
         GetComponent<Rigidbody>().AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+    }
+
+    public void OnFlyDown(InputAction.CallbackContext context)
+    {
+        float flyDownInput = context.ReadValue<float>();
+        flyDownMovement = new Vector3(0, -flyDownInput, 0);
+    }
+
+    private void FlyDown()
+    {
+        transform.Translate(Time.deltaTime * moveSpeed * flyDownMovement);
     }
 
 

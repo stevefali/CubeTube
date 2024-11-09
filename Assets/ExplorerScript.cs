@@ -42,16 +42,6 @@ public class ExplorerScript : MonoBehaviour
         }
     }
 
-
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        Vector2 moveInput = context.ReadValue<Vector2>();
-        explorerMovement = new Vector3(moveInput.x, 0, moveInput.y);
-
-
-
-    }
-
     public void OnLook(InputAction.CallbackContext context)
     {
         Vector2 lookInput = context.ReadValue<Vector2>();
@@ -60,23 +50,25 @@ public class ExplorerScript : MonoBehaviour
     }
 
 
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        Vector2 moveInput = context.ReadValue<Vector2>();
+        explorerMovement = new Vector3(moveInput.x, 0, moveInput.y);
+
+    }
+
     public void OnJump(InputAction.CallbackContext context)
     {
         print("Type: " + context.interaction.GetType() + " Value: " + context.ReadValue<float>());
         GetComponent<Rigidbody>().AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
     }
 
+    // Triggered by the 'Ctrl' key
     public void OnFlyDown(InputAction.CallbackContext context)
     {
         float flyDownInput = context.ReadValue<float>();
         flyDownMovement = new Vector3(0, -flyDownInput, 0);
     }
-
-    private void FlyDown()
-    {
-        transform.Translate(Time.deltaTime * moveSpeed * flyDownMovement);
-    }
-
 
     // Triggered by the 'K' key
     public void OnToggleFly()
@@ -98,4 +90,20 @@ public class ExplorerScript : MonoBehaviour
 
         rigidbody.AddForce(moveThrust.x, 0, moveThrust.z);
     }
+
+    private void jumpWithGravity()
+    {
+
+    }
+
+
+    private void FlyDown()
+    {
+        transform.Translate(Time.deltaTime * moveSpeed * flyDownMovement);
+    }
+
+
+
+
+
 }

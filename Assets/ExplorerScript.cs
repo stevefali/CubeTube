@@ -10,6 +10,7 @@ public class ExplorerScript : MonoBehaviour
     private Vector3 explorerMovement = Vector3.zero;
 
     private Vector3 flyDownMovement = Vector3.zero;
+    private float jumpMovement = 0;
     private Vector3 explorerRotation = Vector3.zero;
     private Vector3 cameraRotation = Vector3.zero;
 
@@ -39,6 +40,7 @@ public class ExplorerScript : MonoBehaviour
         if (GetComponent<Rigidbody>().useGravity)
         {
             MoveWithGravity();
+            JumpWithGravity();
         }
     }
 
@@ -59,8 +61,9 @@ public class ExplorerScript : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        print("Type: " + context.interaction.GetType() + " Value: " + context.ReadValue<float>());
-        GetComponent<Rigidbody>().AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+        // print("Type: " + context.interaction.GetType() + " Value: " + context.ReadValue<float>());
+        // GetComponent<Rigidbody>().AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+        jumpMovement = context.ReadValue<float>();
     }
 
     // Triggered by the 'Ctrl' key
@@ -91,7 +94,18 @@ public class ExplorerScript : MonoBehaviour
         rigidbody.AddForce(moveThrust.x, 0, moveThrust.z);
     }
 
-    private void jumpWithGravity()
+    private void JumpWithGravity()
+    {
+        Rigidbody rigidbody = GetComponent<Rigidbody>();
+        if (IsGrounded())
+        {
+            Vector3 jumpThrust = jumpMovement * jumpSpeed * Vector3.up;
+            rigidbody.AddForce(jumpThrust, ForceMode.Impulse);
+        }
+
+    }
+
+    private void FlyUp()
     {
 
     }
@@ -102,6 +116,12 @@ public class ExplorerScript : MonoBehaviour
         transform.Translate(Time.deltaTime * moveSpeed * flyDownMovement);
     }
 
+
+    private bool IsGrounded()
+    {
+        CapsuleCollider collider = GetComponent<CapsuleCollider>();
+        return Physics.Raycast(transform.position, Vector3.down, (collider.height / 2) + 0.5f);
+    }
 
 
 

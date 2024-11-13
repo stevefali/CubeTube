@@ -4,7 +4,7 @@
 
 ### Main focus of this project: Procedural Generation with Perlin Noise and 3D game development
 
-I have had a ton of fun working on this project, and trying out Unity development for the first time! 
+I have had a ton of fun so far working on this project, and trying out Unity development for the first time! 
 
 My initial idea was to generate the playing area using blocks as 3D tiles. However, that ended up making the game slow down quite a bit from having to render so many game objects. I instead moved to this method of creating walls, floors, and ceiling with long, rectangular blocks to save on the number of game objects required and to also shorten development time a bit for this iteration by being able to essentially produce 2D procedurally generated maps and then give them the third dimension by making the blocks long on the third axis.
 

@@ -14,21 +14,15 @@ public class ExplorerScript : MonoBehaviour
     private Vector3 explorerRotation = Vector3.zero;
     private Vector3 cameraRotation = Vector3.zero;
 
-    // private bool isFlying = false;
-
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
     {
-        // transform.Translate(Time.deltaTime * moveSpeed * explorerMovement);
         if (!GetComponent<Rigidbody>().useGravity)
         {
             MoveFlying();
             FlyDown();
+            FlyUp();
         }
 
         transform.Rotate(explorerRotation * lookSensitivity);
@@ -61,8 +55,6 @@ public class ExplorerScript : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        // print("Type: " + context.interaction.GetType() + " Value: " + context.ReadValue<float>());
-        // GetComponent<Rigidbody>().AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
         jumpMovement = context.ReadValue<float>();
     }
 
@@ -102,12 +94,11 @@ public class ExplorerScript : MonoBehaviour
             Vector3 jumpThrust = jumpMovement * jumpSpeed * Vector3.up;
             rigidbody.AddForce(jumpThrust, ForceMode.Impulse);
         }
-
     }
 
     private void FlyUp()
     {
-
+        transform.Translate(Time.deltaTime * jumpSpeed * jumpMovement * Vector3.up);
     }
 
 

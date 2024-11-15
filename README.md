@@ -25,3 +25,6 @@ My initial idea was to generate the playing area using blocks as 3D tiles. Howev
 
 To get started on learning about procedural generation, I started my coding a simple webpage that procedurally generates a randomized simple 2D tile map on a canvas:
 ![This is what that webpage looked like](readme-images/pg-map.png)
+
+## I have decided to take a new direction on this project. 
+### Lately, I have been focused on setting up controls for an "Explorer" game object that can travel around the map with or without gravity to inspect/test/debug the world.

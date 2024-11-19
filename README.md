@@ -28,4 +28,4 @@ To get started on learning about procedural generation, I started my coding a si
 
 ## I have decided to take a new direction on this project. 
 ### Lately, I have been focused on setting up controls for an "Explorer" game object that can travel around the map with or without gravity to inspect/test/debug the world.
-Next, I plan to do some more work on making a more interesting procedurally generated world.
+Next, I plan to do some more work on making a more interesting procedurally generated map, possibly one that changes and interacts with the player.
